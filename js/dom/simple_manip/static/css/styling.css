@@ -1,0 +1,75 @@
+/*.container {*/
+/*  display: grid;*/
+/*  background-color: Dodger-Blue;*/
+/*  justify-content: center:*/
+/*}  */
+/**/
+/*.container p {*/
+/*  flex: auto;*/
+/*  font-size: 100px;*/
+/*  text-align: center;*/
+/*} */
+/**/
+/*div { */
+/*  border: solid;*/
+/*  border-width: 10px;*/
+/*}*/
+/**/
+/*.mol-png { */
+/*  position: relative;*/
+/*  height: 20px;*/
+/*  width: 20px; */
+/*} */
+/**/
+/*.img-cont {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items; center;*/
+/*  min-height; 10vh;*/
+/*}*/
+
+/* whole page */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: gray;
+}
+/* outer wrapper */
+section {
+  padding: 2rem;
+}
+/* your main box */
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+}
+/* paragraph + link area */
+.container p {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 1rem;
+}
+/* style the serotonin link by id */
+#mol-png {
+  color: #0066cc;
+  text-decoration: none;
+}
+#mol-png:hover {
+  text-decoration: underline;
+}
+/* image wrapper — center image on screen */
+.img-cont {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+}
+/* style all images inside .img-cont */
+.img-cont img {
+  max-width: 90%;
+  max-height: 70vh;
+  height: auto;
+  object-fit: contain;
+}
+
+
