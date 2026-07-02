@@ -1,0 +1,1 @@
+{"cmd":"# FastAPI recieves GET /.; routes match @app.get(\"/\"); sends raw HTML string over the network as text","cmd_opts":"","terminal":"tmux"}

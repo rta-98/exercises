@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <h1>?? Weather App</h1>
+    <div class="search-bar">
+      <input type="text" id="cityInput" placeholder="Enter city name...">
+      <button id="searchBtn">Search</button>
+    </div>
+    <div id="weatherCard" class="weather-card hidden">
+      <div id="cityName" class="city-name"></div>
+      <div id="weatherIcon" class="weather-icon"></div>
+      <div id="temperature" class="temperature"></div>
+      <div id="description" class="description"></div>
+      <div class="details">
+        <div class="detail"><span>??</span><strong id="humidity"></strong><span>Humidity</span></div>
+        <div class="detail"><span>??</span><strong id="wind"></strong><span>Wind</span></div>
+        <div class="detail"><span>???</span><strong id="feels"></strong><span>Feels Like</span></div>
+      </div>
+    </div>
+    <div id="errorMsg" class="error hidden"></div>
+    <div id="loading" class="loading hidden">Loading...</div>
+    <p class="api-note">?? Get your free API key at openweathermap.org and add it to script.js</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
