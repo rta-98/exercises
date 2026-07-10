@@ -1,0 +1,20 @@
+/home/yang/projects/t99_calc/v1/qchem_data/combined/log_fchk/co2.log
+     RDKit          3D
+
+  3  2  0  0  0  0  0  0  0  0999 V2000
+    0.0000    0.0020   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.0911   -0.3799   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+   -1.0911    0.3784    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  2  0
+  1  3  2  0
+M  END
+>  <program>  (1) 
+Gaussian 16, Revision A.03
+
+>  <basis>  (1) 
+6-311+G(2d,2p) (5D, 7F)
+
+>  <File Format>  (1) 
+g03
+
+$$$$

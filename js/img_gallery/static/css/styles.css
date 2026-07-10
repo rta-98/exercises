@@ -9,28 +9,18 @@ h1 {
 
 }
 
-.main-png {
-
-}
-
-.main-png img {
-
-}
-
 .all-pngs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content; center;
 
 }
 
 .all-pngs img {
-
-}
-
-.img-gallery {
-  width: 100%; 
-  display: block;
-  min-height: 100vh;
-  background-color: gray;
-  padding: 100px 0;
+  padding: 10px 10px 10px 10px;
+  width: 20%;
+  height: 20%;
+  object-fit: cover;
 }
 
 .gallery .gallery-filter {
@@ -40,8 +30,9 @@ h1 {
   margin-bottom: 40px;
 }
 
-.gallery .gallery-filter .filter-item {
+.gallery .gallery-filter .btn.filter-item {
   color: #ffffff; 
+  background: #16b5ef;
   font-size: 17px;
   border: 2px solid white;
   text-transform: uppercase;
@@ -54,8 +45,8 @@ h1 {
   transition: all 0.3s ease;
 }
 
-.gallery .gallery-filter .filter-item.active{
-  color: white;
+.gallery .gallery-filter .btn.filter-item.active{
+  color: gray;
   border-color : #16b5ef;
   background: #16b5ef;
 }

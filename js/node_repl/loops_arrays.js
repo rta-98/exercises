@@ -30,6 +30,7 @@ for (let i=0; i < len; i++) {
 }
 
 
+
 // Shorthand arrow function method
 const images1 = ['img1.jpg', 'img2.jpg', 'img2.jpg']
 
@@ -45,8 +46,5 @@ console.log(roots)
 const numbers1 = [1, 4, 9]
 const roots1 = numbers1.map((num) => Math.sqrt(num));
 console.log(roots1)
-
-
-
 
 

@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
-#from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from utility.gen_meta import *
 
@@ -20,10 +19,18 @@ def serve_image(filename: str):
     file_path = STATIC_DIR / "css" / filename
     return FileResponse(file_path) #2 browser recieves file 
 
-@app.get("/js/{filename}") 
-def serve_js(filename: str): 
-    file_path = STATIC_DIR / "js" / filename 
+@app.get("/js/main.js") 
+def serve_js(): 
+    file_path = STATIC_DIR / "js" / "main.js"
     return FileResponse(file_path)
+
+@app.get("/js/modules/{filename}") 
+def serve_modules(filename: str):
+    try:
+        file_path = STATIC_DIR / "js" / "modules" / filename
+    except Exception as e: 
+        raise RuntimeError(f"{e}")
+    return FileResponse(file_path) 
 
 @app.get("/png/{filename}") 
 def serve_png(filename: str):
@@ -40,7 +47,7 @@ def serve_html():
 # API Routes ---------------------------------
 @app.get("/api/mol-img-meta")
 def get_meta():
-    json = STORAGE_DIR / "./json/pfas_meta.json"
+    json = STORAGE_DIR / "./json/df1_fbd.json"
     # application/json tells FastAPI to add an HTTP header to the response called
     # Content-Type: application/json thus informing JS that it is safe to parse
     # as a JSON object
