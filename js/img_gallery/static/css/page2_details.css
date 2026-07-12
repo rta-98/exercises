@@ -1,0 +1,48 @@
+body {
+  font-family: sans-serif;
+  width: 640px;
+  margin: 0 auto;
+  background-color: lightgray;
+}
+
+.all-pngs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content; center;
+
+}
+
+.all-pngs img {
+  padding: 10px 10px 10px 10px;
+  width: 20%;
+  height: 20%;
+  object-fit: cover;
+}
+
+.gallery .gallery-filter {
+  padding: 0 15px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.gallery .gallery-filter .btn.filter-item {
+  color: #ffffff; 
+  background: #16b5ef;
+  font-size: 17px;
+  border: 2px solid white;
+  text-transform: uppercase;
+  display: inline-block;
+  border-radius: 20px;
+  margin-right: 8px;
+  cursor: pointer;
+  padding: 8px 20px 8px 20px;
+  line-height: 1.2;
+  transition: all 0.3s ease;
+}
+
+.gallery .gallery-filter .btn.filter-item.active{
+  color: gray;
+  border-color : #16b5ef;
+  background: #16b5ef;
+}

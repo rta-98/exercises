@@ -5,10 +5,6 @@ body {
   background-color: lightgray;
 }
 
-h1 {
-
-}
-
 .all-pngs {
   display: flex;
   flex-wrap: wrap;
@@ -50,3 +46,4 @@ h1 {
   border-color : #16b5ef;
   background: #16b5ef;
 }
+

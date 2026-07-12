@@ -7,6 +7,7 @@ app = FastAPI()
 BASE_DIR = Path(__file__).parent 
 STATIC_DIR = BASE_DIR / "./static"
 STORAGE_DIR = STATIC_DIR / "./storage"
+TEMPLATES_DIR = STATIC_DIR / "./templates" 
 
 # FastAPI check routes; sees the GET request, 
 # associates {filename} from the GET request with a file on 
@@ -19,10 +20,10 @@ def serve_image(filename: str):
     file_path = STATIC_DIR / "css" / filename
     return FileResponse(file_path) #2 browser recieves file 
 
-@app.get("/js/main.js") 
-def serve_js(): 
-    file_path = STATIC_DIR / "js" / "main.js"
-    return FileResponse(file_path)
+@app.get("/js/{filename}") 
+def serve_js(filename: str): 
+    file_path = STATIC_DIR / "js" / filename
+    return FileResponse(file_path) 
 
 @app.get("/js/modules/{filename}") 
 def serve_modules(filename: str):
@@ -41,7 +42,12 @@ def serve_png(filename: str):
 # FastAPI recieves GET /.; routes match @app.get("/"); sends raw HTML string over the network as text
 @app.get("/")
 def serve_html():
-    file_path = BASE_DIR / "index.html"
+    file_path = TEMPLATES_DIR / "page1_gallery.html"
+    return FileResponse(file_path) #1 broswer recieves html
+
+@app.get("/details")
+def serve_template(): 
+    file_path = TEMPLATES_DIR / "page2_details.html"
     return FileResponse(file_path) #1 broswer recieves html
 
 # API Routes ---------------------------------
@@ -52,17 +58,4 @@ def get_meta():
     # Content-Type: application/json thus informing JS that it is safe to parse
     # as a JSON object
     return FileResponse(json, media_type="application/json") 
-
-
-
-
-
-
-
-
-
-
-
-
-
 

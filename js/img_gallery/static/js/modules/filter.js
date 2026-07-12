@@ -5,6 +5,7 @@ function filter(e) {
   for (let i = 0; i < btns.length; i++) {
     btns[i].classList.remove("active");
   };
+
   btnClass.add("active");
   const cards = document.querySelectorAll(".card") // imgs 
   for (let i = 0; i < cards.length; i++) {
@@ -13,7 +14,8 @@ function filter(e) {
       cards[i].style.display = "block"; 
     } else {
       cards[i].style.display = "none";
-  }
-}};
+    };
+  };
+};
 
 export { filter };
