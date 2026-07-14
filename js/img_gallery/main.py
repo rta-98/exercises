@@ -1,9 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from pydantic import BaseModel 
 from pathlib import Path
 from utility.gen_meta import *
+import pandas as pd
 
 app = FastAPI() 
+app.mount("/css", StaticFiles(directory="static/css"), name="css")
+app.mount("/js", StaticFiles(directory="static/js"), name="js")
+
 BASE_DIR = Path(__file__).parent 
 STATIC_DIR = BASE_DIR / "./static"
 STORAGE_DIR = STATIC_DIR / "./storage"
@@ -14,7 +20,11 @@ TEMPLATES_DIR = STATIC_DIR / "./templates"
 # the hardrive in /png/ and sends it back to the browser in 
 # the form of binary data 
 
+class MolName(BaseModel):
+  molname: str
+
 # Static File Routes ---------------------------------
+"""
 @app.get("/css/{filename}")
 def serve_image(filename: str):
     file_path = STATIC_DIR / "css" / filename
@@ -32,7 +42,7 @@ def serve_modules(filename: str):
     except Exception as e: 
         raise RuntimeError(f"{e}")
     return FileResponse(file_path) 
-
+"""
 @app.get("/png/{filename}") 
 def serve_png(filename: str):
     file_path = STORAGE_DIR / "png" / filename 
@@ -45,8 +55,8 @@ def serve_html():
     file_path = TEMPLATES_DIR / "page1_gallery.html"
     return FileResponse(file_path) #1 broswer recieves html
 
-@app.get("/details")
-def serve_template(): 
+@app.get("/details/{name}")
+def serve_template(name: str): 
     file_path = TEMPLATES_DIR / "page2_details.html"
     return FileResponse(file_path) #1 broswer recieves html
 
@@ -59,3 +69,12 @@ def get_meta():
     # as a JSON object
     return FileResponse(json, media_type="application/json") 
 
+@app.post("/api/details")
+def serve_data(mol_name: MolName = Body(...)):
+    name = mol_name.molname # accessing the molname attribute of the mol_name instance;
+    # that is the instance of the Pydantic Model, a DTO (data transfer object) 
+    df1_json = STORAGE_DIR / "./json/df1_fbd.json"
+    df = pd.read_json(df1_json)
+    mol_details = df[df["Molecule"] == f"{name}"].to_dict()
+    return {"data": mol_details} #1 broswer recieves html
+    

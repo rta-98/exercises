@@ -18,11 +18,13 @@ function appendPngs(arr, filter) {
     const imgSrc = arr[i][0];
     const motif = arr[i][1];
     const smiles = arr[i][2];
+    const name = arr[i][3];
     const newImg = document.createElement("img");
     const allPngsDiv = document.querySelector(".all-pngs");
     newImg.src = "png/" + imgSrc; // df1["img"]
     newImg.dataset.motif = motif.toLowerCase(); // df1["Motif"] 
     newImg.dataset.smiles = smiles
+    newImg.dataset.name = name 
     newImg.classList.add("card");  
     allPngsDiv.appendChild(newImg);
   };

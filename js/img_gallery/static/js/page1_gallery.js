@@ -2,7 +2,7 @@
 import { filter } from "./modules/filter.js";
 import { toggleDetails } from "./modules/nav.js";
 import { appendBtns, appendPngs } from "./modules/append.js"; 
-import { getMolJson, domManip } from "./modules/gen-meta.js";
+import { getMolJson, domManip, returnMolJson } from "./modules/gen-meta.js";
 
 // DOM selection ---------------------------------
 const allPngsDiv = document.querySelector(".all-pngs");
@@ -31,8 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!grid) return;
   grid.addEventListener("click", (e) => {
     const tile = e.target.closest('[data-smiles]');
+    const smiles = tile.dataset.smiles
+    const name = tile.dataset.name 
     if (!tile) return;
-    toggleDetails();
-    console.log(tile.dataset.smiles);
+    toggleDetails(name);
   });
 });
+
