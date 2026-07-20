@@ -1,7 +1,7 @@
 // Module import --------------------------------- 
 import { filter } from "./modules/filter.js";
 import { toggleDetails } from "./modules/nav.js";
-import { appendBtns, appendPngs } from "./modules/append.js"; 
+import { appendBtns, appendSideNavBtns, appendPngs } from "./modules/append.js"; 
 import { getMolJson, domManip, returnMolJson } from "./modules/gen-meta.js";
 
 // DOM selection ---------------------------------
@@ -22,7 +22,7 @@ const motifsArr = [
 "PFAL",
 "Unk"];
 
-appendBtns(motifsArr); // append filter buttons 
+appendSideNavBtns(motifsArr); // append side nav buttons
 domManip(appendPngs, filter); // append mol images
 
 // binding click event to Mol imgs to trigger programmatic nav

@@ -3,15 +3,31 @@
   <head>
     <meta charset="utf-8" />
     <title>Molecules!</title>
-      <link href="/css/page2_details.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="/css/page2_details.css" rel="stylesheet"/>
   </head>
   <body> 
+    <h5 class"mol-title"></h5> 
     <section class="gui-display">
       <div class="main-png"></div>
+      <div id="model3d_container" class="viewer-hidden">
+        <div id="model3d"></div>
+      </div>
     </section>
-    <section class="chem-details">
-      <table>
-    </section> 
+    <section class="chem-details"></section> 
+      <div class="table-container"> 
+        <table> 
+          <caption></caption> 
+          <thead> 
+            <tr> 
+              <th scope="col">Property</th>
+              <th scope="col">Value</th>
+            </tr> 
+          </thead> 
+          <tbody></tbody>
+        </div>
     <script type="module" src="/js/page2_details.js"></script> 
   </body>
 </html> 

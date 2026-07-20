@@ -5,7 +5,6 @@ function filter(e) {
   for (let i = 0; i < btns.length; i++) {
     btns[i].classList.remove("active");
   };
-
   btnClass.add("active");
   const cards = document.querySelectorAll(".card") // imgs 
   for (let i = 0; i < cards.length; i++) {

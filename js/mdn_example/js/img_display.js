@@ -2,7 +2,6 @@ const displayedImage = document.querySelector(".displayed-img");
 const thumbBar = document.querySelector(".thumb-bar");
 const btn = document.querySelector("button");
 const overlay = document.querySelector(".overlay");
-
 const fileNames = ['pic1.jpg', 'pic2.jpg', 'pic3.jpg', 'pic4.jpg', 'pic5.jpg'];
 const baseURL = 'https://mdn.github.io/shared-assets/images/examples/learn/gallery/'
 
@@ -36,7 +35,7 @@ function tabUpdateImg(e) {
 }
 
 btn.addEventListener("click", (e) => {
-  e.preventDefault();
+ e.preventDefault();
   if (btn.classList.contains("dark")) {
     btn.textContent = "Lighten";
     overlay.style.backgroundColor = 'rgb(0 0 0 / 0.5)';

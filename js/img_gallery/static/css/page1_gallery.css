@@ -1,49 +1,126 @@
 body {
-  font-family: sans-serif;
-  width: 640px;
-  margin: 0 auto;
-  background-color: lightgray;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/*---------------------------------Layout Wrapper Div---------------------------------*/
+.layout-wrapper {
+  display: grid;
+  grid-template-columns: 200px 1fr; 
+  gap: 10px;
+  align-items: stretch;
+  flex-grow: 1;
+  margin: auto;
+  max-width: 1750px;
+}
+
+/*---------------------------------Side Navigation Div---------------------------------*/
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: sticky; /*Stays in place when scrolling*/
+  z-index: 1; /*Stay on top*/
+  top: 16px; /*Stay at the top*/
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden; /*Disable horizontal scroll*/ 
+  padding-top: 0px;
+  position: sticky;
+}
+
+/*---------------------------------Side Navigation Header---------------------------------*/
+.sidenav-header {
+  display:block;
+  width: 100%;
+  background-color: #1A1A2E;
+}
+
+#nav-hr {
+  border: 5px solid #ed7e32 !important;
+  margin: 10px 0;
+  background-color: transparent;
+  opacity: 1;
+}
+
+#nav-title {
+  font-family: 'Rajdhani';
+  font-weight: 200px;
+  font-style: italic;
+  font-size: 25px;
+  text-align: left;
+  color: white;
+}
+
+/*---------------------------------Side Navigation Buttons---------------------------------*/
+.sidenav .btn.filter-item {
+  font-family: 'Rajdhani';
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
+  font-size: 20px;
+  text-align: left;
+  width: 100%;
+  color: white;
+  display: block;
+}
+
+.sidenav .btn.filter-item:hover {
+  font-family: 'Rajdhani';
+  color: #708CBD;  
+  font-weight: bold;
+}
+
+.sidenav .btn.filter-item.active {
+  font-family: 'Rajdhani';
+  color: blue;
+  background-color: white;
+}
+
+.sidenav .btn.filter-item.active:hover {
+  font-family: 'Rajdhani';
+  color: blue;
+  background-color: white;
+}
+
+/*---------------------------------Page Content---------------------------------*/
+main {
+  height: 100%;
+  width: 1500px;
+}
+
+h1 {
+  font-family: 'Rajdhani';
+  font-size: 50px;
+  font-weight: 600;
+}
+
+#title-hr {
+  border: 5px solid #ed7e32 !important;
+  margin: 10px 0;
+  background-color: transparent;
+  opacity: 1;
+}
+
+/*---------------------------------Image Gallery---------------------------------*/
+.img-gallery {
+  display: flex; 
+  flex-direction: column;
+  width: 1fr;
 }
 
 .all-pngs {
   display: flex;
   flex-wrap: wrap;
-  justify-content; center;
-
+  justify-content: left;
 }
 
 .all-pngs img {
-  padding: 10px 10px 10px 10px;
-  width: 20%;
-  height: 20%;
+  padding: 3px 3px 3px 3px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
-}
-
-.gallery .gallery-filter {
-  padding: 0 15px;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.gallery .gallery-filter .btn.filter-item {
-  color: #ffffff; 
-  background: #16b5ef;
-  font-size: 17px;
-  border: 2px solid white;
-  text-transform: uppercase;
-  display: inline-block;
-  border-radius: 20px;
-  margin-right: 8px;
-  cursor: pointer;
-  padding: 8px 20px 8px 20px;
-  line-height: 1.2;
-  transition: all 0.3s ease;
-}
-
-.gallery .gallery-filter .btn.filter-item.active{
-  color: gray;
-  border-color : #16b5ef;
-  background: #16b5ef;
 }
 

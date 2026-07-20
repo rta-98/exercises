@@ -24,7 +24,7 @@ img = storage / "./png"
 json = storage / "./json"
 
 # converting "df1.csv" to json ---------------------------------
-df1_fbd = pd.read_json( json / "df1_fbd.json" )
+df1_meta = pd.read_json( json / "df1_meta.json" )
 #print(df[["smi_check", "SMILES", "Motif"]].head(100).to_string(index=False))
 SIZE = (200,200)
 BG_COLOR = (.29, .31, .33)
@@ -32,7 +32,7 @@ smi_valid = data.services.InternalValid.validator
 #|%%--%%| <EVag4yrKRL|f88wVnqhVe>
 # Converting df_smiles/df1.sdf into a list of Mol objects; the order correlates with df1 from nasa7_torsions_gen.py  
 mol2sdf = data.bridge.load_mols_sdf
-df1_mols, df1_paths = mol2sdf(sdf_df / "df1_fbd.sdf")
+df1_mols, df1_paths = mol2sdf(sdf_df / "df1_meta.json")
 df1_img_paths = []
 df1_smiles_list = [] 
 i = 0
