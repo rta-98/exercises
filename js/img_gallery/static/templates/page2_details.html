@@ -9,25 +9,41 @@
     <link href="/css/page2_details.css" rel="stylesheet"/>
   </head>
   <body> 
-    <h5 class"mol-title"></h5> 
-    <section class="gui-display">
-      <div class="main-png"></div>
-      <div id="model3d_container" class="viewer-hidden">
-        <div id="model3d"></div>
+    <div class="layout-wrapper"> 
+      <!-- Begin Title -->
+      <div class="header">
+        <h5 class="mol-title"></h5> 
+        <hr id="title-hr">
       </div>
-    </section>
-    <section class="chem-details"></section> 
-      <div class="table-container"> 
-        <table> 
-          <caption></caption> 
-          <thead> 
-            <tr> 
-              <th scope="col">Property</th>
-              <th scope="col">Value</th>
-            </tr> 
-          </thead> 
-          <tbody></tbody>
+
+      <!-- Begin Details -->
+      <div class="details">
+        <div class="main-png"></div>
+        <div class="table-container"> 
+          <table> 
+            <caption></caption> 
+            <thead> 
+              <tr> 
+                <th scope="col">Property</th>
+                <th scope="col">Value</th>
+              </tr> 
+            </thead> 
+            <tbody></tbody>
+          </table>
         </div>
+      </div>
+
+      <!-- Begin GUI -->
+      <div class="gui-display">
+        <div id="model3d_container" class="viewer-hidden">
+          <div id="model3d"></div>
+        </div>
+      </div>
+
+      <!-- Begin Footer -->
+      <div class="footer"></div>
+
+    </div> <!-- End .layout-wrapper -->
     <script type="module" src="/js/page2_details.js"></script> 
   </body>
 </html> 

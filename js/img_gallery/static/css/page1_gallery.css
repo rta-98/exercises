@@ -4,17 +4,36 @@ body {
   flex-direction: column;
 }
 
-
-
 /*---------------------------------Layout Wrapper Div---------------------------------*/
 .layout-wrapper {
   display: grid;
+  grid-template-areas: 
+    "header header"
+    "sidenav content" 
+    "footer footer";
   grid-template-columns: 200px 1fr; 
+  grid-template-rows: auto 1fr auto;
   gap: 10px;
-  align-items: stretch;
   flex-grow: 1;
   margin: auto;
+  min-height: 100vh;
   max-width: 1750px;
+}
+
+.layout-wrapper div.header {
+  grid-area: header;
+}
+
+.layout-wrapper div.sidenav {
+  grid-area: sidenav;
+}
+
+.layout-wrapper div.content {
+  grid-area: content;
+}
+
+.layout-wrapper div.footer {
+  grid-area: footer; 
 }
 
 /*---------------------------------Side Navigation Div---------------------------------*/
@@ -28,19 +47,22 @@ body {
   background-color: #111;
   overflow-x: hidden; /*Disable horizontal scroll*/ 
   padding-top: 0px;
-  position: sticky;
 }
 
 /*---------------------------------Side Navigation Header---------------------------------*/
 .sidenav-header {
-  display:block;
+  display: block;
   width: 100%;
-  background-color: #1A1A2E;
+}
+
+form {
+  padding-top: 20px;
+  padding-bottom: 60px;
 }
 
 #nav-hr {
-  border: 5px solid #ed7e32 !important;
-  margin: 10px 0;
+  border: 1px solid #ed7e32 !important;
+  width: 140px;
   background-color: transparent;
   opacity: 1;
 }
@@ -50,8 +72,10 @@ body {
   font-weight: 200px;
   font-style: italic;
   font-size: 25px;
-  text-align: left;
+  text-align: center;
   color: white;
+  margin: 0;
+  padding-top: 10px;
 }
 
 /*---------------------------------Side Navigation Buttons---------------------------------*/
@@ -88,7 +112,8 @@ body {
 /*---------------------------------Page Content---------------------------------*/
 main {
   height: 100%;
-  width: 1500px;
+  margin: 0px 0px 0px 0px;
+  width: 1300px;
 }
 
 h1 {
@@ -106,21 +131,26 @@ h1 {
 
 /*---------------------------------Image Gallery---------------------------------*/
 .img-gallery {
-  display: flex; 
-  flex-direction: column;
-  width: 1fr;
+  display: flex;
 }
 
 .all-pngs {
   display: flex;
   flex-wrap: wrap;
+  gap: 2px;
   justify-content: left;
 }
 
 .all-pngs img {
-  padding: 3px 3px 3px 3px;
-  width: 100px;
-  height: 100px;
+/*  padding: 3px 3px 3px 3px;*/
+  width: 106.5px;
+  height: 106.5px;
   object-fit: cover;
+  transform: translateZ(0);
 }
 
+.all-pngs img:hover {
+  z-index: 10;
+  border: 2px ;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}

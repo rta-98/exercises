@@ -8,19 +8,6 @@ import { getMolJson, domManip, returnMolJson } from "./modules/gen-meta.js";
 const allPngsDiv = document.querySelector(".all-pngs");
 
 // DOM creation ---------------------------------
-const motifsArr = [
-"PFECA",
-"PFASA", 
-"FASA",
-"PFCA",
-"FTS",
-"FTCA",
-"MeFASAA",
-"FTOH",
-"PFOH",
-"PFSA",
-"PFAL",
-"Unk"];
 
 appendSideNavBtns(motifsArr); // append side nav buttons
 domManip(appendPngs, filter); // append mol images
@@ -38,3 +25,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Appending Side Navigation Categories ---------------------------------
+const df = await getMolJson();
+const allCats = [];
+for (let i = 0; i < df.length; i++) {
+  const row = df[i];
+  const cats = row[1];
+  if (!allCats.includes(cats)) {
+    allCats.push(cats);
+  }
+}
+
+const motifsArr = allCats;
+
+//[
+//"PFECA",
+//"PFASA", 
+//"FASA",
+//"PFCA",
+//"FTS",
+//"FTCA",
+//"MeFASAA",
+//"FTOH",
+//"PFOH",
+//"PFSA",
+//"PFAL",
+//"Unk"];

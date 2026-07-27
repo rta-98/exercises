@@ -1,54 +1,51 @@
 body {
-  font-family: sans-serif;
-  width: 640px;
-  margin: 0 auto;
-  background-color: lightgray;
+  min-height: 100vh;
 }
 
-.all-pngs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content; center;
-
+/*---------------------------------Layout Wrapper Div---------------------------------*/
+.layout-wrapper {
+  display: grid;
+  grid-template-areas: 
+    "header header"
+    "gui-display gui-display" 
+    "details details";
+  grid-template-columns: 400px 400px; 
+  grid-template-rows: auto auto auto;
+  gap: 10px;
+  flex-grow: 1;
+  margin: 0;
+  max-width: 3000px;
 }
 
-.all-pngs img {
-  padding: 10px 10px 10px 10px;
-  width: 20%;
-  height: 20%;
-  object-fit: cover;
+.layout-wrapper div.header {
+  grid-area: header;
 }
 
-.gallery .gallery-filter {
-  padding: 0 15px;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 40px;
+.layout-wrapper div.details {
+  grid-area: details;
 }
 
-.gallery .gallery-filter .btn.filter-item {
-  color: #ffffff; 
-  background: #16b5ef;
-  font-size: 17px;
-  border: 2px solid white;
-  text-transform: uppercase;
-  display: inline-block;
-  border-radius: 20px;
-  margin-right: 8px;
-  cursor: pointer;
-  padding: 8px 20px 8px 20px;
-  line-height: 1.2;
-  transition: all 0.3s ease;
+.layout-wrapper div.gui-display {
+  grid-area: gui-display;
 }
 
-.gallery .gallery-filter .btn.filter-item.active{
-  color: gray;
-  border-color : #16b5ef;
-  background: #16b5ef;
+.layout-wrapper div.footer {
+  grid-area: footer; 
 }
 
-/*Table Styling*/
+/*---------------------------------Header---------------------------------*/
+.mol-title {
+  font-family: 'Rajdhani';
+  font-weight: 200px;
+  font-style: italic;
+  font-size: 25px;
+  margin: 0;
+}
 
+/*---------------------------------Mol Title---------------------------------*/
+
+
+/*---------------------------------Table Container---------------------------------*/
 .table-container {
   max-height: 300px;
   border: 1px solid black;
@@ -71,7 +68,7 @@ th[scope="row"] {
 }
 
 td {
-  text-align: center;
+  text-align: left;
 }
 
 tr:nth-of-type(even) {
@@ -91,3 +88,12 @@ caption {
   caption-side: bottom;
   padding: 10px;
 }
+
+/*---------------------------------3D GUI---------------------------------*/
+#model3d_container {
+}
+
+#model3d {
+  cursor: grab;
+}
+

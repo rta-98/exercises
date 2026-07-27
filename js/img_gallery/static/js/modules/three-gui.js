@@ -17,7 +17,6 @@ import { CSS2DRenderer, CSS2DObject } from
 // ---------------------------------------------------------------------------
 // VIEWER STATE
 // ---------------------------------------------------------------------------
-
 const modelSize = {
   aspect: 2,
   width: 800,
@@ -110,8 +109,8 @@ function initializeViewer(options = {}) {
   controls = new TrackballControls(camera, renderer.domElement);
   controls.target.set(0, 0, 0);
   controls.position0.set(0, 0, 17);
-  controls.rotateSpeed = 3.0;
-  controls.zoomSpeed = 1.2;
+  controls.rotateSpeed = 20.0;
+  controls.zoomSpeed = 0.8;
   controls.panSpeed = 0.8;
   controls.noZoom = false;
   controls.noPan = false;

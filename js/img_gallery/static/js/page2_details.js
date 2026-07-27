@@ -1,7 +1,7 @@
 // Module import --------------------------------- 
 import { filter } from "./modules/filter.js";
 import { toggleDetails } from "./modules/nav.js";
-import { appendBtns, appendSideNavBtns, appendPngs, appendMainPng, appendTable } from "./modules/append.js"; 
+import { appendBtns, appendSideNavBtns, appendPngs, appendMainPng, appendTitle, appendTable } from "./modules/append.js"; 
 import { getMolJson, domManip, returnMolJson } from "./modules/gen-meta.js";
 import Basic3DViewer from "./modules/three-gui.js";
 
@@ -18,7 +18,9 @@ const response = await returnMolJson(molName); // must add await
 const molData = response.data[molName] // molecular data in JSON 
 
 appendMainPng(molData);
+appendTitle(molName);
 appendTable(molData);
+
 
 // Initializing 3D Viewer ---------------------------------
 function initViewer() {
@@ -33,9 +35,10 @@ function initViewer() {
     containerOuterId: "model3d_container"
   });
   Basic3DViewer.loadPDBFromUrl(pdb);
+    const viewer = document.getElementById('model3d_container') || document.getElementById('model3d');
+    if (viewer) viewer.scrollIntoView({ behavior: 'smooth' });
 };
 
 initViewer();
 
 document.addEventListener("DOMContentLoader", initViewer);
-

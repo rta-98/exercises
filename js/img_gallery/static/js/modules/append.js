@@ -68,6 +68,14 @@ function appendMainPng(molData) {
   mainPngDiv.appendChild(mainPng);
 }; // appendMainPng(molData);
 
+
+// Appending Title ---------------------------------
+function appendTitle(molName) {
+  const header = document.querySelector(".mol-title");
+  header.textContent = "Details: " + molName;
+  //header.textContent = molName;
+}
+
 // Appending Data Table ---------------------------------
 function appendTable(molData) {
   const tbody = document.querySelector('tbody');
@@ -85,4 +93,4 @@ function appendTable(molData) {
   };
 };// jsonToTable(molData);
 
-export { appendBtns, appendSideNavBtns, appendPngs, appendMainPng, appendTable };
+export { appendBtns, appendSideNavBtns, appendPngs, appendMainPng, appendTitle, appendTable };

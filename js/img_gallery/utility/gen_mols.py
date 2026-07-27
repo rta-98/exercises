@@ -23,8 +23,13 @@ csv = storage / "./csv"
 img = storage / "./png"
 json = storage / "./json"
 
+df1 = Path('/home/yang/projects/t99_calc/data/storage/json/df1_fbd.json')
+
+df = pd.read_json(df1)
+
 # converting "df1.csv" to json ---------------------------------
-df1_meta = pd.read_json( json / "df1_meta.json" )
+df1_meta = pd.read_json()
+help(mol2sdf)
 #print(df[["smi_check", "SMILES", "Motif"]].head(100).to_string(index=False))
 SIZE = (200,200)
 BG_COLOR = (.29, .31, .33)
@@ -61,7 +66,7 @@ for path in sdf_202.iterdir():
     mol = Chem.SDMolSupplier(path)
     mol = mol[0]
     smiles = Chem.MolToSmiles(mol)
-    for df_name in df1_fbd["Molecule"].to_list():
+    for df_name in df["Molecule"].to_list():
         if df_name == file_name:
             print(smiles, file_name)
             img_path = img / f"{file_name}.png"
@@ -78,23 +83,26 @@ for path in sdf_202.iterdir():
 
 
 #|%%--%%| <VPlnLgpaJX|P8e5OMnbiq>
-
-    for df_smiles in df1_fbd["SMILES"].to_list():
-        print(df_smiles)
-            mol = Chem.SDMolSupplier(path) 
-            mol = mol[0]
-            smiles = Chem.MolToSmiles(mol)
-            mol_fname = Path(path).stem
-            img_path = img / f"{mol_fname}.png"
-            AllChem.Compute2DCoords(mol)
-            drawer = rdMolDraw2D.MolDraw2DCairo(200, 200)
-            live_ops = drawer.drawOptions()
-            live_ops.setBackgroundColour(BG_COLOR) 
-            live_ops.bracketsAroundAtomLists = False 
-            drawer.DrawMolecule(mol)
-            drawer.FinishDrawing() 
-            drawer.WriteDrawingText(img_path)
-            df1_img_paths.append(img_path.name)
-            df1_smiles_list.append(smiles)
+for df_smiles in df1_fbd["SMILES"].to_list():
+    print(df_smiles)
+        mol = Chem.SDMolSupplier(path) 
+        mol = mol[0]
+        smiles = Chem.MolToSmiles(mol)
+        mol_fname = Path(path).stem
+        img_path = img / f"{mol_fname}.png"
+        AllChem.Compute2DCoords(mol)
+        drawer = rdMolDraw2D.MolDraw2DCairo(200, 200)
+        live_ops = drawer.drawOptions()
+        live_ops.setBackgroundColour(BG_COLOR) 
+        live_ops.bracketsAroundAtomLists = False 
+        drawer.DrawMolecule(mol)
+        drawer.FinishDrawing() 
+        drawer.WriteDrawingText(img_path)
+        df1_img_paths.append(img_path.name)
+        df1_smiles_list.append(smiles)
             
 df1_fbd["smi_check"] = df1_smiles_list
+#|%%--%%| <P8e5OMnbiq|qJ8rJtOlDr>
+
+
+
