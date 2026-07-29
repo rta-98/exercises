@@ -17,10 +17,13 @@ const molName = pathParts[pathParts.length - 1]; // 23_ftca
 const response = await returnMolJson(molName); // must add await
 const molData = response.data[molName] // molecular data in JSON 
 
-appendMainPng(molData);
-appendTitle(molName);
-appendTable(molData);
+// Extracting meta data ---------------------------------
+const molFormula = molData.mol_formula;
+const name = molData.iupac;
 
+appendMainPng(molData);
+appendTitle(name);
+appendTable(molData);
 
 // Initializing 3D Viewer ---------------------------------
 function initViewer() {

@@ -66,7 +66,7 @@ def serve_template(name: str):
 # API Routes ---------------------------------
 @app.get("/api/mol-img-meta")
 def get_meta():
-    json = STORAGE_DIR / "./json/df1_fbd.json"
+    json = STORAGE_DIR / "./json/df1_fbd_pc.json"
     # application/json tells FastAPI to add an HTTP header to the response called
     # Content-Type: application/json thus informing JS that it is safe to parse
     # as a JSON object
@@ -76,9 +76,8 @@ def get_meta():
 def serve_data(mol_name: MolName):
     name = mol_name.molname # accessing the molname attribute of the mol_name instance;
     # that is the instance of the Pydantic Model, a DTO (data transfer object) 
-    df_json = STORAGE_DIR / "./json/df1_fbd.json"
+    df_json = STORAGE_DIR / "./json/df1_fbd_pc.json"
     df = pd.read_json(df_json)
     filtered_df = df[df["Molecule"] == f"{name}"]
     nested_df = filtered_df.set_index("Molecule").to_dict(orient="index")
     return {"data": nested_df} #1 broswer recieves html
-    

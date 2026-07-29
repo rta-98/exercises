@@ -46,9 +46,6 @@ function appendPngs(arr, filter) {
     newImg.classList.add("card");  
     allPngsDiv.appendChild(newImg);
   };
-    const cards = document.querySelectorAll(".card") // imgs 
-    for (let i = 0; i < cards.length; i++) {
-  };
     const btns = document.querySelectorAll(".btn.filter-item");
     for (let i = 0; i < btns.length; i++) {
       btns[i].addEventListener("click", filter); 

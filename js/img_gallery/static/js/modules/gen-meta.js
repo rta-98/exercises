@@ -17,9 +17,18 @@ async function getMolJson() {
   };
 };
 
-async function domManip(appendPngs, filter) {
-  const arrFromJson = await getMolJson();
-  appendPngs(arrFromJson, filter); // appendPngs called 
+async function domManip(appendPngs, appendSideNavBtns, filter) {
+  const df = await getMolJson();
+  const allCats = [];
+  for (let i = 0; i < df.length; i++) {
+    const row = df[i];
+    const cats = row[1];
+    if (!allCats.includes(cats)) {
+      allCats.push(cats);
+    };
+  };
+  appendSideNavBtns(allCats);
+  appendPngs(df, filter); // appendPngs called 
 };
 
 async function returnMolJson(name) {
