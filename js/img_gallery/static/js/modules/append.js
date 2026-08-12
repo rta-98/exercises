@@ -69,7 +69,7 @@ function appendMainPng(molData) {
 // Appending Title ---------------------------------
 function appendTitle(molName) {
   const header = document.querySelector(".mol-title");
-  header.textContent = "Details: " + molName;
+  header.textContent = molName;
   //header.textContent = molName;
 }
 

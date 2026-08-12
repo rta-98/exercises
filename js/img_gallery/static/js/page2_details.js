@@ -39,7 +39,7 @@ function initViewer() {
   });
   Basic3DViewer.loadPDBFromUrl(pdb);
     const viewer = document.getElementById('model3d_container') || document.getElementById('model3d');
-    if (viewer) viewer.scrollIntoView({ behavior: 'smooth' });
+//    if (viewer) viewer.scrollIntoView({ behavior: 'smooth' });
 };
 
 initViewer();

@@ -34,6 +34,7 @@ help(mol2sdf)
 SIZE = (200,200)
 BG_COLOR = (.29, .31, .33)
 smi_valid = data.services.InternalValid.validator 
+
 #|%%--%%| <EVag4yrKRL|f88wVnqhVe>
 # Converting df_smiles/df1.sdf into a list of Mol objects; the order correlates with df1 from nasa7_torsions_gen.py  
 mol2sdf = data.bridge.load_mols_sdf
@@ -42,22 +43,24 @@ df1_img_paths = []
 df1_smiles_list = [] 
 i = 0
 for mol, path in zip(df1_mols, df1_paths):
-    smiles = Chem.MolToSmiles(mol)
+    mol_h = Chem.AddHs(mol)
+    smiles = Chem.MolToSmiles(mol_h)
     df1_smiles_list.append(smiles)
-    mol_fname = Path(path).stem
-    img_path = img / mol_fname
-    AllChem.Compute2DCoords(mol)
-    drawer = rdMolDraw2D.MolDraw2DCairo(200, 200)
+    mol_h_fname = Path(path).stem
+    img_path = img / mol_h_fname
+    AllChem.Compute2DCoords(mol_h)
+    drawer = rdmol_hDraw2D.mol_hDraw2DCairo(200, 200)
     live_ops = drawer.drawOptions()
     live_ops.setBackgroundColour(BG_COLOR) 
     live_ops.bracketsAroundAtomLists = False 
-    drawer.DrawMolecule(mol)
+    drawer.Drawmol_hecule(mol_h)
     drawer.FinishDrawing() 
     drawer.WriteDrawingText(img_path)
-    df1_img_paths.append(mol_fname)
+    df1_img_paths.append(mol_h_fname)
 
 df["img"] = df1_img_paths
 df.to_json(json / "df1_meta.json", orient="records") 
+
 #|%%--%%| <f88wVnqhVe|VPlnLgpaJX>
 df1_img_paths = []
 df1_smiles_list = [] 
