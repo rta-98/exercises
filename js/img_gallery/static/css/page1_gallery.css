@@ -78,7 +78,7 @@ form {
   padding-top: 10px;
 }
 
-/*---------------------------------Side Navigation Buttons---------------------------------*/
+/*---------------------------------Side Navigation Classes---------------------------------*/
 .sidenav .btn.filter-item {
   font-family: 'Rajdhani';
   background-color: transparent;
@@ -107,6 +107,90 @@ form {
   font-family: 'Rajdhani';
   color: blue;
   background-color: white;
+}
+
+/*---------------------------------Side Navigation Footer---------------------------------*/
+/* Positioning footer at bottom of div */
+.nav-footer {
+  position: relative;
+  padding: 10px;
+  text-align: center;
+}
+
+/*The box around the slider -- the switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 34px;
+}
+
+/*Hides default HTML checkbox*/
+#viewToggle {
+  opacity: 0; 
+  width: 0;
+  height: 0;
+} /*<input type="checkbox" id="viewToggle">*/
+
+/*The Box*/
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; bottom: 0; right: 0;
+  border-radius: 28px;
+  background-color: #ccc;
+  transition: .4s;
+} 
+
+/*The Pill (before element is the child*/
+.slider:before {
+  position: absolute;
+  content: ""; /*Must have this to insert the pill*/
+  width: 50px;
+  height: 29px;
+  left: 3px;
+  top: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 28px;
+  z-index: 2; /* Keeps circle above text */
+} 
+
+/*Text Inside the Slider */
+.slider-text {
+  position: absolute;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: bold;
+  font-family: sans-serif;
+  color: white;
+  transition: .4s;
+  z-index: 1;
+  top: 50%;
+}
+
+.off-text {
+  right: 8px;
+  color: #2196F3;
+}
+
+.on-text {
+  left: 8px;
+}
+
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+  overflow: hidden;
+}
+
+input:checked + .slider:before {
+  transform: translateX(62px);
 }
 
 /*---------------------------------Page Content---------------------------------*/

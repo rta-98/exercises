@@ -9,40 +9,45 @@
     <link href="css/page1_gallery.css" rel="stylesheet"/>
   </head>
   <body>
-<!--  Main Header -->
-<!--    <header class="main-header">-->
-<!--      <h1 class=title>Thermal Destruction Efficiencies of PFAS</h1>-->
-<!--      <hr id="title-hr">-->
-<!--    </header>-->
     <div class="layout-wrapper">
-      <!--Side Navigation-->
+
+      <!--Title-->
       <div class="header">
         <h1 class=title>T99 Calculator</h1>
         <hr id="title-hr">
       </div>
+
+      <!--Side Navigation-->
       <div class="sidenav">
-        <div class="search">
-<!--          <form>-->
-<!--            <input class="search-input" placeholder="Search ..."> -->
-<!--            <button type="submit">Submit</button>-->
-<!--          </form>-->
-        </div>
+        <!-- Side Nav Header --> 
         <div class="sidenav-header"> 
           <h3 id="nav-title">Toggle Subclass</h3>
           <hr id="nav-hr">
         </div> 
+
+        <!-- Side Nav Footer --> 
+        <div class="nav-footer">
+
+          <!-- Side-Nav Toggle Switch --> 
+          <label class="switch"> 
+            <input type="checkbox" id="viewToggle"> 
+            <span class="slider">
+              <span class="slider-text off-text">MOL</span> 
+              <span class="slider-text on-text">MECH</span> 
+            </span> 
+          </label> 
+
+        </div> 
       </div>
+
       <!--Main Page -->
       <div class="content"> 
         <main>
-<!--          <div class="header-container">-->
-<!--            <h1 class=title>Thermal Destruction Efficiencies of PFAS</h1>-->
-<!--            <hr id="title-hr">-->
-<!--          </div>-->
           <div class="img-gallery">
             <div class="all-pngs"></div>
           </div>
         </main> <!-- end main -->
+
       </div> 
       <div class="footer"></div>
     </div> <!-- end layout-wrapper -->

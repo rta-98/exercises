@@ -43,5 +43,4 @@ function initViewer() {
 };
 
 initViewer();
-
 document.addEventListener("DOMContentLoader", initViewer);
