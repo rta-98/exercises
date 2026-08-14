@@ -2,7 +2,7 @@
 import { filter } from "./modules/filter.js";
 import { toggleDetails } from "./modules/nav.js";
 import { appendBtns, appendSideNavBtns, appendPngs, appendMainPng, appendTitle, appendTable } from "./modules/append.js"; 
-import { getMolJson, domManip, returnMolJson } from "./modules/gen-meta.js";
+import { getMolJson, genMols, returnMolJson } from "./modules/gen-meta.js";
 import Basic3DViewer from "./modules/three-gui.js";
 
 // DOM selection ---------------------------------

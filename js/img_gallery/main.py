@@ -64,6 +64,16 @@ def serve_template(name: str):
     return FileResponse(file_path) #1 broswer recieves html
 
 # API Routes ---------------------------------
+# api route for multiple mol-imgs
+@app.get("/api/mols-img-meta")
+def get_meta():
+    json = STORAGE_DIR / "./json/df1_fbd_pc.json"
+    # application/json tells FastAPI to add an HTTP header to the response called
+    # Content-Type: application/json thus informing JS that it is safe to parse
+    # as a JSON object
+    return FileResponse(json, media_type="application/json") 
+
+# api route for single mol-img 
 @app.get("/api/mol-img-meta")
 def get_meta():
     json = STORAGE_DIR / "./json/df1_fbd_pc.json"

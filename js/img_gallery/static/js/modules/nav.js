@@ -6,4 +6,5 @@ function toggleDetails(name) {
   const pageUrl = window.location.pathname;
   window.location.href = homePath[pageUrl] || '/';
 }
+
 export { toggleDetails };
