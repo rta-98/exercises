@@ -14,6 +14,8 @@ function appendBtns(arr) {
 function appendSideNavBtns(arr) {
   const newActiveBtn = document.createElement("button");
   const sideNav = document.querySelector(".sidenav"); 
+  const oldBtns = sideNav.querySelectorAll(".filter-item");
+  oldBtns.forEach(btn => btn.remove());
   newActiveBtn.className = "btn filter-item active";
   newActiveBtn.textContent = "Display All";
   newActiveBtn.dataset.motif = "all";
@@ -32,13 +34,21 @@ function appendSideNavBtns(arr) {
 function appendPngs(arr, filter) {
   let len = arr.length;
   const imgCol = [];
+  const content = document.querySelector(".mol-info");
+  content.innerHTML = `
+      <div class="img-gallery">
+        <div class="all-pngs"></div>
+      </div>
+  `;
   for (let i = 0; i < len; i++) {
     const imgSrc = arr[i][0];
     const motif = arr[i][1];
     const smiles = arr[i][2];
     const name = arr[i][3];
+
     const newImg = document.createElement("img");
     const allPngsDiv = document.querySelector(".all-pngs");
+
     newImg.src = "/png/" + imgSrc; // df1["img"]
     newImg.dataset.motif = motif.toLowerCase(); // df1["Motif"] 
     newImg.dataset.smiles = smiles
@@ -49,6 +59,29 @@ function appendPngs(arr, filter) {
     const btns = document.querySelectorAll(".btn.filter-item");
     for (let i = 0; i < btns.length; i++) {
       btns[i].addEventListener("click", filter); 
+  };
+};
+
+// produces HTML for mechanism about page ---------------------------------
+function appendMechInfo(arr) {
+  const mechDict = {};
+  const btns = document.querySelectorAll(".btn.filter-item");
+  const content = document.querySelector(".mol-info");
+  content.innerHTML = `
+    <p class="temp"></p>
+  `;
+  const para = document.querySelector(".temp");
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", (event) => { 
+      for (i = 0; i < btns.length; i++) {
+        btns[i].classList.remove("active"); 
+      };
+      const acr = event.target.dataset.motif;
+      if (!acr) return;
+      const btnClass = event.target.classList;
+      btnClass.add("active");
+      para.textContent = acr;
+    }); 
   };
 };
 
@@ -64,7 +97,6 @@ function appendMainPng(molData) {
   mainPng.classList.add("card");  
   mainPngDiv.appendChild(mainPng);
 }; // appendMainPng(molData);
-
 
 // Appending Title ---------------------------------
 function appendTitle(molName) {
@@ -90,4 +122,4 @@ function appendTable(molData) {
   };
 };// jsonToTable(molData);
 
-export { appendBtns, appendSideNavBtns, appendPngs, appendMainPng, appendTitle, appendTable };
+export { appendBtns, appendSideNavBtns, appendPngs, appendMechInfo, appendMainPng, appendTitle, appendTable };

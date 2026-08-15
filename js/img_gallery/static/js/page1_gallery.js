@@ -1,7 +1,7 @@
 // Module import --------------------------------- 
 import { filter } from "./modules/filter.js";
 import { toggleDetails } from "./modules/nav.js";
-import { appendBtns, appendSideNavBtns, appendPngs } from "./modules/append.js"; 
+import { appendBtns, appendSideNavBtns, appendPngs, appendMechInfo } from "./modules/append.js"; 
 import { getMolsJson, genMols, getMolJson, genMol, returnMolJson } from "./modules/gen-meta.js";
 
 // DOM selection ---------------------------------
@@ -12,9 +12,11 @@ const gridSwitch = document.getElementById("gridSwitch");
 function callDomManip(gs) {
   if (gs.dataset.flag == "true") {
     console.log("true");
+    const allPngs = document.querySelectorAll("img");
+    allPngs.forEach(img => img.remove());
     genMols(appendPngs, appendSideNavBtns, filter);
   } else {
-    window.location.reload(); 
+    genMol(appendMechInfo, appendSideNavBtns);
   }
 };
 
@@ -33,13 +35,13 @@ toggleGrid(gridSwitch);
 
 // Binding click event to Mol imgs to trigger programmatic nav from mol images
 document.addEventListener("DOMContentLoaded", () => { 
-  const grid = allPngsDiv;
+  const grid = document.querySelector(".mol-info");
   if (!grid) return;
   grid.addEventListener("click", (e) => {
     const tile = e.target.closest('[data-smiles]');
+    if (!tile) return;
     const smiles = tile.dataset.smiles
     const name = tile.dataset.name 
-    if (!tile) return;
     toggleDetails(name);
   });
 });

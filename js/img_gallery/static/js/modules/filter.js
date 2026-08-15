@@ -6,7 +6,7 @@ function filter(e) {
     btns[i].classList.remove("active");
   };
   btnClass.add("active");
-  const cards = document.querySelectorAll(".card") // imgs 
+  const cards = document.querySelectorAll(".card") // filter() grabs imgs and buttons
   for (let i = 0; i < cards.length; i++) {
     const cardMotif = cards[i].dataset.motif;
     if (btnMotif == cardMotif || btnMotif === "all") {
