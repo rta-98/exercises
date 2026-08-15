@@ -76,7 +76,7 @@ def get_meta():
 # api route for single mol-img 
 @app.get("/api/mol-img-meta")
 def get_meta():
-    json = STORAGE_DIR / "./json/df1_fbd_pc.json"
+    json = STORAGE_DIR / "./json/pfas_class_cases_info.json"
     # application/json tells FastAPI to add an HTTP header to the response called
     # Content-Type: application/json thus informing JS that it is safe to parse
     # as a JSON object
