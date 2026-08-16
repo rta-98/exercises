@@ -11,6 +11,7 @@ app.mount("/css", StaticFiles(directory="static/css"), name="css")
 app.mount("/js", StaticFiles(directory="static/js"), name="js")
 app.mount("/png", StaticFiles(directory="static/storage/png"), name="png")
 app.mount("/pdb", StaticFiles(directory="static/storage/pdb"), name="pdb") 
+app.mount("/pdb/pfas_class_case_pdbs", StaticFiles(directory="static/storage/pdb/pfas_class_case_pdbs"), name="pdb_acr") 
 
 BASE_DIR = Path(__file__).parent 
 STATIC_DIR = BASE_DIR / "./static"
@@ -74,7 +75,7 @@ def get_mols_meta():
     return FileResponse(json, media_type="application/json") 
 
 # api route for single mol-img 
-@app.get("/api_mol/mol-img-meta")
+@app.get("/api_mols/mol-img-meta")
 def get_mol_meta():
     json_mol = STORAGE_DIR / "./json/pfas_class_cases_info.json"
     # application/json tells FastAPI to add an HTTP header to the response called

@@ -37,7 +37,7 @@ async function genMols(appendPngs, appendSideNavBtns, filter) {
 //---------------------------------------------------------------------------------------------------
 // Generating single mol image for subclass ---------------------------------
 async function getMolJson() {
-  const urlMol = "/api_mol/mol-img-meta";
+  const urlMol = "/api_mols/mol-img-meta";
   try {
     const responseMol = await fetch(urlMol);
     const dataMol =  await responseMol.json();
@@ -45,23 +45,22 @@ async function getMolJson() {
   return dataMol; // returned for appendPngs()
 
   } catch (error) {
-      console.error('Error fetching /api/mol-img-meta:', error);
+      console.error('Error fetching /api_mols/mol-img-meta:', error);
   };
 };
 
 // appendPng, appendSideNavBtns ---------------------------------
 async function genMol(appendMechInfo, appendSideNavBtns, filter) {
   const mech_df = await getMolJson();
-  const acrs = Object.values(mech_df.subclass_acr);
-  const smiles = Object.values(mech_df.SMILES);
-  const mech = Object.values(mech_df.mech);
-  const pdb = Object.values(mech_df.pdbs);
-  const repr = Object.values(mech_df.repr_mol);
-  const name = Object.values(mech_df.subclass_name);
-
+  const acrs = Object.keys(mech_df);
+  const acrs_lower = [];
+  for (let i = 0; i < acrs.length; i++) {
+    const acr_tmp = acrs[i];
+    const acr_lower = acr_tmp.toLowerCase();
+    acrs_lower.push(acr_lower);
+  }
   appendSideNavBtns(acrs);
-  appendMechInfo(mech_df);
-
+  appendMechInfo(acrs, acrs_lower, mech_df);
 };
 
 //---------------------------------------------------------------------------------------------------

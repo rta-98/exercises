@@ -1,3 +1,5 @@
+import Basic3DViewer from "./three-gui.js"
+
 function appendBtns(arr) {
   let len = arr.length;
   for (let i = 0; i < len; i++) {
@@ -63,11 +65,15 @@ function appendPngs(arr, filter) {
 };
 
 // produces HTML for mechanism about page ---------------------------------
-function appendMechInfo(arr) {
-  const mechDict = {};
+function appendMechInfo(acrs, acrs_lower, mech_df) {
   const btns = document.querySelectorAll(".btn.filter-item");
   const content = document.querySelector(".mol-info");
   content.innerHTML = `
+    <div class="gui-display">
+      <div id="model3d_container" class="viewer-hidden">
+        <div id="model3d"></div>
+      </div>
+    </div>
     <p class="temp"></p>
   `;
   const para = document.querySelector(".temp");
@@ -80,9 +86,24 @@ function appendMechInfo(arr) {
       if (!acr) return;
       const btnClass = event.target.classList;
       btnClass.add("active");
-      para.textContent = acr;
+      // remember, acr is lowered 
+      for (let i = 0; i < acrs_lower.length; i++) { 
+        if (acrs_lower[i] === acr) {
+          console.log(mech_df[acrs[i]]);
+          para.textContent = mech_df[acrs[i]];
+          const mech_obj = mech_df[acrs[i]]
+          const pdb = "/pdb/pfas_class_case_pdbs/" + mech_obj.pdbs;
+          Basic3DViewer.initializeViewer({
+            containerId: "model3d",
+            containerOuterId: "model3d_container"
+          });
+          Basic3DViewer.loadPDBFromUrl(pdb);
+          const viewer = document.getElementById('model3d_container') || document.getElementById('model3d');
+        };
+      };
     }); 
-  };
+  }; // end btns for loop
+
 };
 
 // Appending main image ---------------------------------
