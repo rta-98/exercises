@@ -69,13 +69,30 @@ function appendMechInfo(acrs, acrs_lower, mech_df) {
   const btns = document.querySelectorAll(".btn.filter-item");
   const content = document.querySelector(".mol-info");
   content.innerHTML = `
+    <div class="mech-title">
+      <h3 id="mech-header" class="subclass-header"></h3> 
+      <hr class="subclass-line"> 
+    </div>
+
     <div class="gui-display">
+      <h5 id="gui-header" class="subclass-header"></h5> 
+      <hr class="subclass-line"> 
       <div id="model3d_container" class="viewer-hidden">
         <div id="model3d"></div>
       </div>
     </div>
-    <p class="temp"></p>
+
+    <div class="about">
+      <h5 id="about-header" class="subclass-header"></h5> 
+      <hr class="subclass-line"> 
+      <div id="chem-draw"></div>
+    </div> 
+
   `;
+  const mechTitle = document.getElementById(".mech-header");
+  const guiHeader = document.getElementById(".gui-header");
+  const aboutHeader = document.getElementById(".about-header");
+  const chemDrawDiv = document.getElementById(".chem-draw");
   const para = document.querySelector(".temp");
   for (let i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", (event) => { 
@@ -93,17 +110,22 @@ function appendMechInfo(acrs, acrs_lower, mech_df) {
           para.textContent = mech_df[acrs[i]];
           const mech_obj = mech_df[acrs[i]]
           const pdb = "/pdb/pfas_class_case_pdbs/" + mech_obj.pdbs;
+          // initializing GUI
           Basic3DViewer.initializeViewer({
             containerId: "model3d",
             containerOuterId: "model3d_container"
           });
           Basic3DViewer.loadPDBFromUrl(pdb);
           const viewer = document.getElementById('model3d_container') || document.getElementById('model3d');
+          // appending title 
+          const title = mech_df.subclass_name;
+          const reprMol = mech_df.subclass_name;
+          mechTitle.textContent = title;
+          guiHeader.textContent = "Representative Case: " + reprMol;
         };
       };
     }); 
   }; // end btns for loop
-
 };
 
 // Appending main image ---------------------------------
