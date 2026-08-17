@@ -5,6 +5,52 @@ body {
 }
 
 /*---------------------------------Layout Wrapper Div---------------------------------*/
+/*  content.innerHTML = `*/
+/*    <div class="mech-title">*/
+/*      <h3 id="mech-header" class="subclass-header"></h3> */
+/*      <hr class="subclass-line"> */
+/*    </div>*/
+/**/
+/*    <div class="gui-display">*/
+/*      <h5 id="gui-header" class="subclass-header"></h5> */
+/*      <hr class="subclass-line"> */
+/*      <div id="model3d_container" class="viewer-hidden">*/
+/*        <div id="model3d"></div>*/
+/*      </div>*/
+/*    </div>*/
+/**/
+/*    <div class="about">*/
+/*      <h5 id="about-header" class="subclass-header"></h5> */
+/*      <hr class="subclass-line"> */
+/*      <div id="chem-draw"></div>*/
+/*    </div> */
+/**/
+/*  `;*/
+
+.mech-title hr {
+  margin-top: 10px;
+  margin-bottom; 3px;
+}
+
+#mech-header {
+  font-style: italic;
+  font-size: 25px;
+  margin: 0px; 
+}
+
+#model3d_container {
+  height: 50%;
+  width: 50%;
+}
+
+#chem-draw img {
+  height: 50%;
+  width: 50%;
+}
+
+
+
+/*---------------------------------Layout Wrapper Div---------------------------------*/
 .layout-wrapper {
   display: grid;
   grid-template-areas: 
@@ -123,7 +169,7 @@ label.switch {
 }
 
 /*Hides default HTML checkbox*/
-#gridSwitch {
+#toggleSwitch {
   opacity: 0; 
   width: 0;
   height: 0;

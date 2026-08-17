@@ -50,7 +50,8 @@ async function getMolJson() {
 };
 
 // appendPng, appendSideNavBtns ---------------------------------
-async function genMol(appendMechInfo, appendSideNavBtns, filter) {
+async function genMol(appendMechInfo, appendSideNavBtns, gs) {
+
   const mech_df = await getMolJson();
   const acrs = Object.keys(mech_df);
   const acrs_lower = [];
@@ -59,8 +60,10 @@ async function genMol(appendMechInfo, appendSideNavBtns, filter) {
     const acr_lower = acr_tmp.toLowerCase();
     acrs_lower.push(acr_lower);
   }
-  appendSideNavBtns(acrs);
-  appendMechInfo(acrs, acrs_lower, mech_df);
+  const content = document.querySelector(".mol-info");
+  content.innerHTML = ``;
+  appendSideNavBtns(acrs, gs);
+  appendMechInfo(acrs, acrs_lower, mech_df, gs);
 };
 
 //---------------------------------------------------------------------------------------------------

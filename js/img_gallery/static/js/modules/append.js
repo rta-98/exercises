@@ -1,4 +1,4 @@
-import Basic3DViewer from "./three-gui.js"
+import Basic3DViewer from "./viewer3d.js"
 
 function appendBtns(arr) {
   let len = arr.length;
@@ -13,23 +13,25 @@ function appendBtns(arr) {
   };
 };
 
-function appendSideNavBtns(arr) {
+function appendSideNavBtns(arr, gs) {
   const newActiveBtn = document.createElement("button");
   const sideNav = document.querySelector(".sidenav"); 
   const oldBtns = sideNav.querySelectorAll(".filter-item");
   oldBtns.forEach(btn => btn.remove());
   newActiveBtn.className = "btn filter-item active";
-  newActiveBtn.textContent = "Display All";
-  newActiveBtn.dataset.motif = "all";
-  sideNav.appendChild(newActiveBtn);
-  let len = arr.length;
-  for (let i = 0; i < len; i++) {
+  newActiveBtn.textContent = "PFCA";
+  newActiveBtn.dataset.motif = "pfca";
+  for (let i = 0; i < arr.length; i++) {
     const motif = arr[i]; 
-    const newBtn = document.createElement("button");
-    newBtn.textContent = motif;
-    newBtn.className = "btn filter-item";
-    newBtn.dataset.motif = motif.toLowerCase(); 
-    sideNav.appendChild(newBtn);
+    if (motif == "Unk") {
+      continue;  
+    } else {
+      const newBtn = document.createElement("button");
+      newBtn.textContent = motif;
+      newBtn.className = "btn filter-item";
+      newBtn.dataset.motif = motif.toLowerCase(); 
+      sideNav.appendChild(newBtn);
+    };
   };
 };
 
@@ -65,9 +67,10 @@ function appendPngs(arr, filter) {
 };
 
 // produces HTML for mechanism about page ---------------------------------
-function appendMechInfo(acrs, acrs_lower, mech_df) {
-  const btns = document.querySelectorAll(".btn.filter-item");
+function appendMechInfo(acrs, acrs_lower, mech_df, gs) {
+  const flag = gs.dataset.flag;
   const content = document.querySelector(".mol-info");
+  const btns = document.querySelectorAll(".btn.filter-item");
   content.innerHTML = `
     <div class="mech-title">
       <h3 id="mech-header" class="subclass-header"></h3> 
@@ -87,13 +90,17 @@ function appendMechInfo(acrs, acrs_lower, mech_df) {
       <hr class="subclass-line"> 
       <div id="chem-draw"></div>
     </div> 
-
   `;
-  const mechTitle = document.getElementById(".mech-header");
-  const guiHeader = document.getElementById(".gui-header");
-  const aboutHeader = document.getElementById(".about-header");
-  const chemDrawDiv = document.getElementById(".chem-draw");
-  const para = document.querySelector(".temp");
+
+  // DOM Selection ---------------------------------
+  const mechTitle = document.getElementById("mech-header");
+  const guiHeader = document.getElementById("gui-header");
+  const aboutHeader = document.getElementById("about-header");
+  const chemDrawDiv = document.getElementById("chem-draw");
+
+  // DOM Creation ---------------------------------
+  const newImg = document.createElement("img");
+  
   for (let i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", (event) => { 
       for (i = 0; i < btns.length; i++) {
@@ -105,10 +112,14 @@ function appendMechInfo(acrs, acrs_lower, mech_df) {
       btnClass.add("active");
       // remember, acr is lowered 
       for (let i = 0; i < acrs_lower.length; i++) { 
-        if (acrs_lower[i] === acr) {
-          console.log(mech_df[acrs[i]]);
-          para.textContent = mech_df[acrs[i]];
+        if (acrs_lower[i] === "display all") {
+          content.innerHTML = "";
+        } else if (acrs_lower[i] === acr) {
+          //console.log(mech_df[acrs[i]]);
           const mech_obj = mech_df[acrs[i]]
+          const name = mech_obj.subclass_name;
+          const repr = mech_obj.repr_mol;
+          //console.log(name);
           const pdb = "/pdb/pfas_class_case_pdbs/" + mech_obj.pdbs;
           // initializing GUI
           Basic3DViewer.initializeViewer({
@@ -117,11 +128,14 @@ function appendMechInfo(acrs, acrs_lower, mech_df) {
           });
           Basic3DViewer.loadPDBFromUrl(pdb);
           const viewer = document.getElementById('model3d_container') || document.getElementById('model3d');
-          // appending title 
-          const title = mech_df.subclass_name;
-          const reprMol = mech_df.subclass_name;
+          const title = mech_obj.subclass_name + " (" + acrs[i] + ")";
+          const reprMol = mech_obj.repr_mol;
+          const imgPath = mech_obj.imgs;
+          // appending element
           mechTitle.textContent = title;
-          guiHeader.textContent = "Representative Case: " + reprMol;
+          guiHeader.textContent = "Representative Case: " + repr;
+          newImg.src = "/png/pfas/" + imgPath;
+          chemDrawDiv.appendChild(newImg);
         };
       };
     }); 

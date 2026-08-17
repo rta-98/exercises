@@ -10,13 +10,20 @@ const gridSwitch = document.getElementById("gridSwitch");
 
 // DOM creation ---------------------------------
 function callDomManip(gs) {
-  if (gs.dataset.flag == "true") {
-    console.log("true");
+  const flag = gs.dataset.flag;
+  if (flag == "true") {
     const allPngs = document.querySelectorAll("img");
     allPngs.forEach(img => img.remove());
     genMols(appendPngs, appendSideNavBtns, filter);
   } else {
-    genMol(appendMechInfo, appendSideNavBtns);
+    genMol(appendMechInfo, appendSideNavBtns, gs);
+    const btns = document.querySelectorAll(".btn.filter-item");
+    const content = document.querySelector(".mol-info");
+    for (let i = 0; i < btns.length; i++) {
+      if (btns[i].textContent == "Display All" && btns[i].className == "btn filter-item active") {
+        content.innerHTML = ``;
+      };
+    };
   }
 };
 

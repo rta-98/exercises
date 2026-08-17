@@ -1,5 +1,5 @@
 /*
- * Basic 3D viewer module
+ * Basic 3D viewer module (Updated with Double/Triple Bond Support)
  * Extracted from perry3d.js + molecule.js + filereader.js + elements.js
  *
  * Dependencies (ES module builds, loaded via CDN):
@@ -390,21 +390,28 @@ function addAtom(AtomicNum, x, y, z, value = 0) {
   molecule[numatoms].charge = 0.0;
   molecule[numatoms].highlite = 0;
 
+  // Use an object instead of an array to store bond orders
   if (typeof bonds[numatoms] === 'undefined') {
-    bonds[numatoms] = [];
+    bonds[numatoms] = {};
   }
 }
 
 function addBond(atom1, atom2, molecule = Mol(0)) {
   const bonds = molecule[0].bonds;
   if (!bonds[atom1]) {
-    bonds[atom1] = [];
+    bonds[atom1] = {};
   }
   if (!bonds[atom2]) {
-    bonds[atom2] = [];
+    bonds[atom2] = {};
   }
-  if (bonds[atom1].indexOf(atom2) === -1) {
-    bonds[atom1].push(atom2);
+  
+  // Increment the bond order for both atoms to keep the graph undirected
+  if (!bonds[atom1][atom2]) {
+    bonds[atom1][atom2] = 1;
+    bonds[atom2][atom1] = 1;
+  } else {
+    bonds[atom1][atom2]++;
+    bonds[atom2][atom1]++;
   }
 }
 
@@ -419,7 +426,7 @@ function clearScene() {
   atoms.forEach((obj) => scene.remove(obj));
   bondsArray.forEach((obj) => scene.remove(obj));
   while (scene.getObjectByName('label')) {
-    scene.remove(scene.getObjectByName('label'));L
+    scene.remove(scene.getObjectByName('label'));
   }
   while (scene.getObjectByName('extra')) {
     scene.remove(scene.getObjectByName('extra'));
@@ -477,7 +484,7 @@ function drawAtom(atomNum, AtomSize, value = 0) {
   }
 }
 
-function drawBond(atom1, atom2, value = 0) {
+function drawBond(atom1, atom2, order = 1, value = 0) {
   const params = parameters();
   const molecule = Mol(value);
   const AtomScale = params.atomScale;
@@ -497,16 +504,54 @@ function drawBond(atom1, atom2, value = 0) {
   const point1 = new THREE.Vector3(x1, y1, z1);
   const point2 = new THREE.Vector3(x2, y2, z2);
   const dist = point1.distanceTo(point2);
+  
   const bondGeo = new THREE.CylinderGeometry(BondWidth, BondWidth, dist, resolution);
   const bondMat = new THREE.MeshPhongMaterial({
     color: BondColor,
     transparent: trans,
     opacity: opac
   });
-  const bondMesh = cylinderMesh(point1, point2, bondMat, bondGeo);
-  bondMesh.name = `bond_${atom1}-${atom2}`;
-  bondsArray.push(bondMesh);
-  scene.add(bondMesh);
+
+  // Helper to draw a single cylinder
+  const drawCyl = (p1, p2, suffix) => {
+    const bondMesh = cylinderMesh(p1, p2, bondMat, bondGeo);
+    bondMesh.name = `bond_${atom1}-${atom2}_${suffix}`;
+    bondsArray.push(bondMesh);
+    scene.add(bondMesh);
+  };
+
+  if (order === 1) {
+    drawCyl(point1, point2, '1');
+  } else {
+    // Calculate perpendicular offset vector for double/triple bonds
+    const dir = new THREE.Vector3().subVectors(point2, point1).normalize();
+    let up = new THREE.Vector3(0, 1, 0);
+    
+    // If the bond is nearly vertical, use the X axis as 'up' instead to avoid zero-vector cross product
+    if (Math.abs(dir.y) > 0.95) {
+      up.set(1, 0, 0);
+    }
+    
+    // Shift by 1.2x the bond width so they don't overlap
+    const offsetVec = new THREE.Vector3().crossVectors(dir, up).normalize().multiplyScalar(BondWidth * 1.2);
+
+    if (order === 2) {
+      const p1a = point1.clone().add(offsetVec);
+      const p2a = point2.clone().add(offsetVec);
+      const p1b = point1.clone().sub(offsetVec);
+      const p2b = point2.clone().sub(offsetVec);
+      drawCyl(p1a, p2a, '1');
+      drawCyl(p1b, p2b, '2');
+    } else if (order >= 3) {
+      const p1a = point1.clone().add(offsetVec);
+      const p2a = point2.clone().add(offsetVec);
+      const p1b = point1.clone().sub(offsetVec);
+      const p2b = point2.clone().sub(offsetVec);
+      drawCyl(point1, point2, '1'); // Center
+      drawCyl(p1a, p2a, '2');       // Offset 1
+      drawCyl(p1b, p2b, '3');       // Offset 2
+    }
+  }
 }
 
 function bondBonded(value = 0) {
@@ -519,10 +564,15 @@ function bondBonded(value = 0) {
     if (!bonds[atomIndex]) {
       continue;
     }
-    for (let j = 0; j < bonds[atomIndex].length; j++) {
-      const connection = bonds[atomIndex][j];
+    
+    // Iterate over the keys (connected atom IDs) in the bonds object
+    for (const connectionStr in bonds[atomIndex]) {
+      const connection = parseInt(connectionStr, 10);
+      
+      // Only draw once per pair
       if (connection > atomIndex) {
-        drawBond(atomIndex, connection, value);
+        const order = bonds[atomIndex][connectionStr];
+        drawBond(atomIndex, connection, order, value);
       }
     }
   }
@@ -619,8 +669,8 @@ function readPDBLines(lines, value = 0) {
       for (let k = 2; k < tokens.length; k++) {
         const to = parseInt(tokens[k], 10);
         if (!Number.isNaN(to) && to !== from) {
+          // Only add the bond in one direction per CONECT entry to avoid double-counting
           addBond(from, to, molecule);
-          addBond(to, from, molecule);
         }
       }
     } else if (prefix === 'END') {
@@ -639,8 +689,8 @@ function readPDBLines(lines, value = 0) {
         const dz = molecule[i].z - molecule[n].z;
         const r = Math.sqrt(dx * dx + dy * dy + dz * dz);
         if (r <= bond) {
+          // Only add in one direction to avoid double-counting
           addBond(i, n, molecule);
-          addBond(n, i, molecule);
         }
       }
     }
