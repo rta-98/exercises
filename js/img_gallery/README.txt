@@ -1,14 +1,10 @@
 # CLONE REPO --------------------------------- 
-git clone feature_toggle_subclass_info https://github.com/rta-98/exercises.git
+git clone -b feature_toggle_subclass_info https://github.com/rta-98/exercises.git
 
 # CREATE ENV --------------------------------- 
 
 # Create a virtual environment
 python -m venv venv
-
-venv\Scripts\activate
-
-# On Mac/Linux:
 source venv/bin/activate
 
 # Install the dependencies
