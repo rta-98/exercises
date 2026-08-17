@@ -4,7 +4,7 @@ import { toggleDetails } from "./modules/nav.js";
 import { appendBtns, appendSideNavBtns, appendPngs, appendMainPng, appendTitle, appendTable } from "./modules/append.js"; 
 import { getMolJson, genMols, returnMolJson } from "./modules/gen-meta.js";
 //import Basic3DViewer from "./modules/three-gui.js";
-import Basic3DViewer from "./modules/viewer3d.js";
+import Basic3DViewer from "./modules/three-gui.js";
 
 // DOM selection ---------------------------------
 const guiDisplay = document.querySelector(".gui-display");
