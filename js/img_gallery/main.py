@@ -9,7 +9,8 @@ import pandas as pd
 app = FastAPI() 
 app.mount("/css", StaticFiles(directory="static/css"), name="css")
 app.mount("/js", StaticFiles(directory="static/js"), name="js")
-app.mount("/png", StaticFiles(directory="static/storage/png"), name="png")
+app.mount("/png", StaticFiles(directory="static/storage/png"), name="img")
+app.mount("/svg", StaticFiles(directory="static/storage/svg"), name="svg")
 app.mount("/pdb", StaticFiles(directory="static/storage/pdb"), name="pdb") 
 app.mount("/pdb/pfas_class_case_pdbs", StaticFiles(directory="static/storage/pdb/pfas_class_case_pdbs"), name="pdb_acr") 
 

@@ -50,7 +50,7 @@ function appendPngs(arr, filter) {
     const smiles = arr[i][2];
     const name = arr[i][3];
 
-    const newImg = document.createElement("img");
+    const newImg = document.createElement("svg");
     const allPngsDiv = document.querySelector(".all-pngs");
 
     newImg.src = "/png/" + imgSrc; // df1["img"]
@@ -130,7 +130,8 @@ function appendMechInfo(acrs, acrs_lower, mech_df, gs) {
           const viewer = document.getElementById('model3d_container') || document.getElementById('model3d');
           const title = mech_obj.subclass_name + " (" + acrs[i] + ")";
           const reprMol = mech_obj.repr_mol;
-          const imgPath = mech_obj.imgs;
+          const imgPath = mech_obj.svgs;
+          console.log(imgPath);
           // appending element
           mechTitle.textContent = title;
           guiHeader.textContent = "Representative Case: " + repr;

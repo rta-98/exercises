@@ -1,0 +1,22 @@
+# open fresh terminal
+cd <folder_you_created>
+cd exercises/js/img_gallery  
+
+ls # make sure main.py exists here 
+
+# if I made changes then
+git pull
+
+# otherwise
+conda activate pfas_webapp 
+uvicorn main:app --port 9999
+
+---------------------------------
+# navigate to either one of these:
+http://127.0.0.1:9999  
+http://localhost:9999
+---------------------------------
+
+# finsh 
+ctrl-c
+conda deactivate
